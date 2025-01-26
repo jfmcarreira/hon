@@ -7,9 +7,8 @@ from typing import Optional, Any
 
 import pkg_resources  # type: ignore[import, unused-ignore]
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import callback
+from homeassistant.core import callback, HomeAssistant
 from homeassistant.helpers.entity import DeviceInfo
-from homeassistant.helpers.typing import HomeAssistantType
 from homeassistant.helpers.update_coordinator import CoordinatorEntity
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from pyhon.appliance import HonAppliance
@@ -47,7 +46,7 @@ class HonInfo:
 
 
 class HonCoordinator(DataUpdateCoordinator[None]):
-    def __init__(self, hass: HomeAssistantType, device: HonAppliance):
+    def __init__(self, hass: HomeAssistant, device: HonAppliance):
         """Initialize my coordinator."""
         super().__init__(
             hass,
@@ -71,7 +70,7 @@ class HonEntity(CoordinatorEntity[HonCoordinator]):
 
     def __init__(
         self,
-        hass: HomeAssistantType,
+        hass: HomeAssistant,
         entry: ConfigEntry,
         device: HonAppliance,
         description: Optional[HonEntityDescription] = None,
@@ -120,7 +119,7 @@ def unique_entities(
     return tuple(result)
 
 
-def get_coordinator(hass: HomeAssistantType, appliance: HonAppliance) -> HonCoordinator:
+def get_coordinator(hass: HomeAssistant, appliance: HonAppliance) -> HonCoordinator:
     coordinators = hass.data[DOMAIN]["coordinators"]
     if appliance.unique_id in coordinators:
         coordinator: HonCoordinator = hass.data[DOMAIN]["coordinators"][
