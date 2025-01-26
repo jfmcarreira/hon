@@ -149,6 +149,7 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
             self._attr_preset_modes.append(mode)
         self._attr_swing_modes = [
             SWING_OFF,
+            "swing",
             SWING_VERTICAL,
             SWING_HORIZONTAL,
             SWING_BOTH,
@@ -278,7 +279,7 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
         vertical = self._device.settings["settings.windDirectionVertical"]
         if swing_mode in [SWING_BOTH, SWING_HORIZONTAL]:
             horizontal.value = "7"
-        if swing_mode in [SWING_BOTH, SWING_VERTICAL]:
+        if swing_mode in ["swing", SWING_BOTH, SWING_VERTICAL]:
             vertical.value = "8"
         if swing_mode in [SWING_OFF, SWING_HORIZONTAL] and vertical.value == "8":
             vertical.value = "5"
