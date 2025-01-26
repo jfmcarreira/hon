@@ -201,7 +201,7 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
         self._attr_hvac_mode = hvac_mode
         if hvac_mode == HVACMode.OFF:
             await self._device.commands["stopProgram"].send()
-            self._device.sync_command("stopProgram", "settings")
+            self._device.settings["settings.onOffStatus"].value = "0"
         else:
             self._device.settings["settings.onOffStatus"].value = "1"
             setting = self._device.settings["settings.machMode"]
@@ -220,7 +220,7 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
 
     async def async_turn_off(self, **kwargs: Any) -> None:
         await self._device.commands["stopProgram"].send()
-        self._device.sync_command("stopProgram", "settings")
+        self._device.settings["settings.onOffStatus"].value = "0"
 
     @property
     def preset_mode(self) -> str | None:
