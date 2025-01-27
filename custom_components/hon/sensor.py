@@ -21,6 +21,7 @@ from homeassistant.const import (
     UnitOfPower,
     UnitOfTime,
     UnitOfTemperature,
+    UnitOfFrequency,
 )
 from homeassistant.core import callback, HomeAssistant
 from homeassistant.helpers.entity import EntityCategory
@@ -516,6 +517,7 @@ SENSORS: dict[str, tuple[SensorEntityDescription, ...]] = {
             key="compressorFrequency",
             name="Compressor Frequency",
             icon="mdi:information",
+            native_unit_of_measurement=UnitOfFrequency.HERTZ,
             device_class=SensorDeviceClass.FREQUENCY,
         ),
     ),
