@@ -202,6 +202,9 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
         self._attr_hvac_mode = hvac_mode
         if hvac_mode == HVACMode.OFF:
             self._device.settings["stopProgram.echoStatus"].value = "1"
+            self._device.settings["stopProgram.tempSel"].value = self._device.settings["settings.tempSel"].value
+            self._device.settings["stopProgram.windSpeed"].value = self._device.settings["settings.windSpeed"].value
+            self._device.settings["stopProgram.windDirectionVertical"].value = self._device.settings["settings.windDirectionVertical"].value
             await self._device.commands["stopProgram"].send()
             self._device.settings["settings.onOffStatus"].value = "0"
         elif hvac_mode == HVACMode.FAN_ONLY:
@@ -224,11 +227,17 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
 
     async def async_turn_on(self, **kwargs: Any) -> None:
         self._device.settings["startProgram.echoStatus"].value = "1"
+        self._device.settings["startProgram.windSpeed"].value = self._device.settings["settings.windSpeed"].value
+        self._device.settings["startProgram.windDirectionVertical"].value = self._device.settings["settings.windDirectionVertical"].value
+        self._device.settings["startProgram.machMode"].value = self._device.settings["settings.machMode"].value
         await self._device.commands["startProgram"].send()
         self._device.sync_command("startProgram", "settings")
 
     async def async_turn_off(self, **kwargs: Any) -> None:
         self._device.settings["stopProgram.echoStatus"].value = "1"
+        self._device.settings["stopProgram.tempSel"].value = self._device.settings["settings.tempSel"].value
+        self._device.settings["stopProgram.windSpeed"].value = self._device.settings["settings.windSpeed"].value
+        self._device.settings["stopProgram.windDirectionVertical"].value = self._device.settings["settings.windDirectionVertical"].value
         await self._device.commands["stopProgram"].send()
         self._device.settings["settings.onOffStatus"].value = "0"
 
