@@ -204,6 +204,11 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
             self._device.settings["stopProgram.echoStatus"].value = "1"
             await self._device.commands["stopProgram"].send()
             self._device.settings["settings.onOffStatus"].value = "0"
+        elif hvac_mode == HVACMode.FAN_ONLY:
+            if program := self._device.settings.get("startProgram.program"):
+                program.value = "iot_fan"
+            self._device.settings["startProgram.echoStatus"].value = "1"
+            await self._device.commands["startProgram"].send()
         else:
             self._device.settings["settings.onOffStatus"].value = "1"
             setting = self._device.settings["settings.machMode"]
