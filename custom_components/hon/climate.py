@@ -187,6 +187,7 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
         if (temperature := kwargs.get(ATTR_TEMPERATURE)) is None:
             return
         self._device.settings["settings.tempSel"].value = str(int(temperature))
+        self._device.settings["settings.echoStatus"].value = "1"
         await self._device.commands["settings"].send()
         self.async_write_ha_state()
 
@@ -200,6 +201,7 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
     async def async_set_hvac_mode(self, hvac_mode: HVACMode) -> None:
         self._attr_hvac_mode = hvac_mode
         if hvac_mode == HVACMode.OFF:
+            self._device.settings["stopProgram.echoStatus"].value = "1"
             await self._device.commands["stopProgram"].send()
             self._device.settings["settings.onOffStatus"].value = "0"
         else:
@@ -211,14 +213,17 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
             else:
                 await self.async_set_preset_mode(HON_HVAC_PROGRAM[hvac_mode])
                 return
+            self._device.settings["settings.echoStatus"].value = "1"
             await self._device.commands["settings"].send()
         self.async_write_ha_state()
 
     async def async_turn_on(self, **kwargs: Any) -> None:
+        self._device.settings["startProgram.echoStatus"].value = "1"
         await self._device.commands["startProgram"].send()
         self._device.sync_command("startProgram", "settings")
 
     async def async_turn_off(self, **kwargs: Any) -> None:
+        self._device.settings["stopProgram.echoStatus"].value = "1"
         await self._device.commands["stopProgram"].send()
         self._device.settings["settings.onOffStatus"].value = "0"
 
@@ -236,6 +241,7 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
         self._handle_coordinator_update(update=False)
         await self.coordinator.async_refresh()
         self._attr_preset_mode = preset_mode
+        self._device.settings["startProgram.echoStatus"].value = "1"
         await self._device.commands["startProgram"].send()
         self.async_write_ha_state()
 
@@ -258,6 +264,7 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
             fan_modes[HON_FAN[int(mode)]] = mode
         self._device.settings["settings.windSpeed"].value = str(fan_modes[fan_mode])
         self._attr_fan_mode = fan_mode
+        self._device.settings["settings.echoStatus"].value = "1"
         await self._device.commands["settings"].send()
         self.async_write_ha_state()
 
@@ -286,6 +293,7 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
         if swing_mode in [SWING_OFF, SWING_VERTICAL] and horizontal.value == "7":
             horizontal.value = "0"
         self._attr_swing_mode = swing_mode
+        self._device.settings["settings.echoStatus"].value = "1"
         await self._device.commands["settings"].send()
         self.async_write_ha_state()
 
