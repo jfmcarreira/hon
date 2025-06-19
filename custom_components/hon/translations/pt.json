@@ -2076,6 +2076,19 @@
             "air_conditioner": {
                 "name": "Ar Condicionado",
                 "state_attributes": {
+                    "swing_mode": {
+                        "name": "Swing Mode",
+                        "state": {
+                            "swing_off": "Desligado",
+                            "swing": "Vertical",
+                            "position_1": "Cima",
+                            "position_2": "Meio 1",
+                            "position_3": "Meio 2",
+                            "position_4": "Meio 3",
+                            "position_5": "Baixo",
+                            "swing_vertical": "Vertical"
+                        }
+                    },
                     "preset_mode": {
                         "name": "Programas",
                         "state": {
