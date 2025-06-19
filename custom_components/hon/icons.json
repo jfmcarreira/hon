@@ -1,0 +1,20 @@
+{
+  "entity": {
+    "climate": {
+      "air_conditioner": {
+        "state_attributes": {
+          "swing_mode": {
+            "state": {
+              "swing": "mdi:arrow-up-down",
+              "position_1": "mdi:fan-chevron-up",
+              "position_2": "mdi:fan-speed-1",
+              "position_3": "mdi:fan-speed-2",
+              "position_4": "mdi:fan-speed-3",
+              "position_5": "mdi:fan-chevron-down"
+            }
+          }
+        }
+      }
+    }
+  }
+}

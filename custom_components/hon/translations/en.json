@@ -2121,6 +2121,19 @@
             "air_conditioner": {
                 "name": "Air conditioner",
                 "state_attributes": {
+                    "swing_mode": {
+                        "name": "Swing Mode",
+                        "state": {
+                            "swing_off": "Off",
+                            "swing": "Swing",
+                            "position_1": "Top",
+                            "position_2": "Middle 1",
+                            "position_3": "Middle 2",
+                            "position_4": "Middle 3",
+                            "position_5": "Bottom",
+                            "swing_vertical": "Swing"
+                        }
+                    },
                     "preset_mode": {
                         "name": "Programs",
                         "state": {
