@@ -975,10 +975,10 @@
                 "name": "Humidity level"
             },
             "probe_temperature": {
-                "name": "Meat Probe Temperature" 
+                "name": "Meat Probe Temperature"
             },
             "steam_tank_level": {
-                "name": "Steam Tank Level" 
+                "name": "Steam Tank Level"
             },
             "descaling_cycle_counter": {
                 "name": "Descaling Cycle Counter"
@@ -2100,10 +2100,10 @@
                 "name": "Temperature Reached"
             },
             "turnspit": {
-                "name": "Turnspit" 
+                "name": "Turnspit"
             },
             "steam_active": {
-                "name": "Steam Active" 
+                "name": "Steam Active"
             },
             "descaling_required": {
                 "name": "Descaling Required"
@@ -2192,6 +2192,19 @@
             "air_conditioner": {
                 "name": "Air conditioner",
                 "state_attributes": {
+                    "swing_mode": {
+                        "name": "Swing Mode",
+                        "state": {
+                            "swing_off": "Off",
+                            "swing": "Swing",
+                            "position_1": "Top",
+                            "position_2": "Middle 1",
+                            "position_3": "Middle 2",
+                            "position_4": "Middle 3",
+                            "position_5": "Bottom",
+                            "swing_vertical": "Swing"
+                        }
+                    },
                     "preset_mode": {
                         "name": "Programs",
                         "state": {

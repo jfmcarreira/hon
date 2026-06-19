@@ -1,16 +1,17 @@
 {
   "domain": "hon",
-  "name": "Haier hOn Revived",
+  "name": "Haier hOn",
   "codeowners": [
     "@mmalolepszy",
-    "@Andre0512"
+    "@Andre0512",
+    "@jfmcarreira"
   ],
   "config_flow": true,
-  "documentation": "https://github.com/mmalolepszy/hon-revived/",
+  "documentation": "https://github.com/jfmcarreira/hon/",
   "iot_class": "cloud_push",
-  "issue_tracker": "https://github.com/mmalolepszy/hon-revived/issues",
+  "issue_tracker": "https://github.com/jfmcarreira/hon/issues",
   "requirements": [
     "pyhon-revived==0.19.0"
   ],
-  "version": "0.19.0"
+  "version": "0.19.1"
 }

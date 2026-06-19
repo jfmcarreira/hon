@@ -11,6 +11,10 @@ from homeassistant.components.climate.const import (
     SWING_BOTH,
     SWING_VERTICAL,
     SWING_HORIZONTAL,
+    PRESET_NONE,
+    PRESET_BOOST,
+    PRESET_SLEEP,
+    PRESET_ECO,
     ClimateEntityFeature,
     HVACMode,
 )
@@ -25,7 +29,7 @@ from homeassistant.core import HomeAssistant
 from pyhon.appliance import HonAppliance
 from pyhon.parameter.range import HonParameterRange
 
-from .const import HON_HVAC_MODE, HON_FAN, DOMAIN, HON_HVAC_PROGRAM
+from .const import HON_HVAC_MODE, HON_FAN, DOMAIN, HON_HVAC_PROGRAM, AC_POSITION_VERTICAL
 from .entity import HonEntity
 
 _LOGGER = logging.getLogger(__name__)
@@ -144,13 +148,23 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
         for mode in device.settings["settings.machMode"].values:
             self._attr_hvac_modes.append(HON_HVAC_MODE[int(mode)])
         self._attr_preset_modes = []
-        for mode in device.settings["startProgram.program"].values:
-            self._attr_preset_modes.append(mode)
+        self._attr_preset_modes.append(PRESET_NONE)
+        self._attr_preset_modes.append(PRESET_SLEEP)
+        self._attr_preset_modes.append(PRESET_BOOST)
+        self._attr_preset_modes.append(PRESET_ECO)
+        # for mode in device.settings["startProgram.program"].values:
+        #     self._attr_preset_modes.append(mode)
         self._attr_swing_modes = [
             SWING_OFF,
+            "swing",
+            "position_1",
+            "position_2",
+            "position_3",
+            "position_4",
+            "position_5",
             SWING_VERTICAL,
-            SWING_HORIZONTAL,
-            SWING_BOTH,
+            #SWING_HORIZONTAL,
+            #SWING_BOTH,
         ]
         self._attr_supported_features = (
             ClimateEntityFeature.TURN_ON
@@ -195,6 +209,7 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
                 self._device.settings["settings.onOffStatus"].value = str(int(current_onoff))
 
         self._device.settings["settings.tempSel"].value = str(int(temperature))
+        self._device.settings["settings.echoStatus"].value = "1"
         await self._device.commands["settings"].send()
         self.schedule_update_ha_state()
 
@@ -223,8 +238,19 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
     async def async_set_hvac_mode(self, hvac_mode: HVACMode) -> None:
         self._attr_hvac_mode = hvac_mode
         if hvac_mode == HVACMode.OFF:
+            self._device.settings["stopProgram.echoStatus"].value = "1"
+            self._device.settings["stopProgram.tempSel"].value = self._device.settings["settings.tempSel"].value
+            self._device.settings["stopProgram.windSpeed"].value = self._device.settings["settings.windSpeed"].value
+            self._device.settings["stopProgram.windDirectionVertical"].value = self._device.settings["settings.windDirectionVertical"].value
             await self._device.commands["stopProgram"].send()
             self._device.settings["settings.onOffStatus"].value = "0"
+        elif hvac_mode == HVACMode.FAN_ONLY:
+            if program := self._device.settings.get("startProgram.program"):
+                program.value = "iot_fan"
+            self._device.settings["startProgram.echoStatus"].value = "1"
+            self._device.settings["startProgram.tempSel"].value = self._device.settings["settings.tempSel"].value
+            self._device.settings["startProgram.windDirectionVertical"].value = self._device.settings["settings.windDirectionVertical"].value
+            await self._device.commands["startProgram"].send()
         else:
             self._device.settings["settings.onOffStatus"].value = "1"
             setting = self._device.settings["settings.machMode"]
@@ -234,23 +260,56 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
             else:
                 await self.async_set_preset_mode(HON_HVAC_PROGRAM[hvac_mode])
                 return
+            self._device.settings["settings.echoStatus"].value = "1"
             await self._device.commands["settings"].send()
         self.schedule_update_ha_state()
 
     async def async_turn_on(self, **kwargs: Any) -> None:
+        self._device.settings["startProgram.echoStatus"].value = "1"
+        self._device.settings["startProgram.windSpeed"].value = self._device.settings["settings.windSpeed"].value
+        self._device.settings["startProgram.windDirectionVertical"].value = self._device.settings["settings.windDirectionVertical"].value
+        self._device.settings["startProgram.machMode"].value = self._device.settings["settings.machMode"].value
         await self._device.commands["startProgram"].send()
         self._device.sync_command("startProgram", "settings")
 
     async def async_turn_off(self, **kwargs: Any) -> None:
+        self._device.settings["stopProgram.echoStatus"].value = "1"
+        self._device.settings["stopProgram.tempSel"].value = self._device.settings["settings.tempSel"].value
+        self._device.settings["stopProgram.windSpeed"].value = self._device.settings["settings.windSpeed"].value
+        self._device.settings["stopProgram.windDirectionVertical"].value = self._device.settings["settings.windDirectionVertical"].value
         await self._device.commands["stopProgram"].send()
         self._device.sync_command("stopProgram", "settings")
+        self._device.settings["settings.onOffStatus"].value = "0"
+
 
     @property
     def preset_mode(self) -> str | None:
         """Return the current Preset for this channel."""
-        return None
+        if self._device.get("silentSleepStatus", 0) == 1:
+            return PRESET_SLEEP
+        if self._device.get("rapidMode", 0) == 1:
+            return PRESET_BOOST
+        if self._device.get("muteStatus", 0) == 1:
+            return PRESET_ECO
+        return PRESET_NONE
 
-    async def async_set_preset_mode(self, preset_mode: str) -> None:
+    async def async_set_preset_mode(self, preset_mode) -> None:
+        self._device.settings["settings.muteStatus"].value = "0"
+        self._device.settings["settings.silentSleepStatus"].value = "0"
+        self._device.settings["settings.rapidMode"].value = "0"
+
+        if preset_mode == PRESET_SLEEP:
+            self._device.settings["settings.silentSleepStatus"].value = "1"
+        elif preset_mode == PRESET_BOOST:
+            self._device.settings["settings.rapidMode"].value = "1"
+        elif preset_mode == PRESET_ECO:
+            self._device.settings["settings.muteStatus"].value = "1"
+
+        self._device.settings["settings.echoStatus"].value = "1"
+        await self._device.commands["settings"].send()
+        self.schedule_update_ha_state()
+
+    async def async_start_program(self, preset_mode: str) -> None:
         """Set the new preset mode."""
         if program := self._device.settings.get("startProgram.program"):
             program.value = preset_mode
@@ -259,6 +318,7 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
         self._handle_coordinator_update(update=False)
         self.coordinator.async_set_updated_data({})
         self._attr_preset_mode = preset_mode
+        self._device.settings["startProgram.echoStatus"].value = "1"
         await self._device.commands["startProgram"].send()
         self.schedule_update_ha_state()
 
@@ -290,6 +350,7 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
             fan_modes[HON_FAN[int(mode)]] = mode
         self._device.settings["settings.windSpeed"].value = str(fan_modes[fan_mode])
         self._attr_fan_mode = fan_mode
+        self._device.settings["settings.echoStatus"].value = "1"
         await self._device.commands["settings"].send()
         self.schedule_update_ha_state()
 
@@ -298,10 +359,12 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
         """Return the swing setting."""
         horizontal = self._device.get("windDirectionHorizontal")
         vertical = self._device.get("windDirectionVertical")
-        if horizontal == 7 and vertical == 8:
-            return SWING_BOTH
-        if horizontal == 7:
-            return SWING_HORIZONTAL
+        if vertical == 2 or vertical == 4 or vertical == 5 or vertical == 6 or vertical == 7:
+            return AC_POSITION_VERTICAL[vertical]
+        # if horizontal == 7 and vertical == 8:
+        #     return SWING_BOTH
+        # if horizontal == 7:
+        #     return SWING_HORIZONTAL
         if vertical == 8:
             return SWING_VERTICAL
         return SWING_OFF
@@ -316,17 +379,30 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
             if current_onoff is not None:
                 self._device.settings["settings.onOffStatus"].value = str(int(current_onoff))
 
-        horizontal = self._device.settings["settings.windDirectionHorizontal"]
+        #horizontal = self._device.settings["settings.windDirectionHorizontal"]
         vertical = self._device.settings["settings.windDirectionVertical"]
-        if swing_mode in [SWING_BOTH, SWING_HORIZONTAL]:
-            horizontal.value = "7"
-        if swing_mode in [SWING_BOTH, SWING_VERTICAL]:
-            vertical.value = "8"
-        if swing_mode in [SWING_OFF, SWING_HORIZONTAL] and vertical.value == "8":
+        if swing_mode == "position_1":
+            vertical.value = "2"
+        elif swing_mode == "position_2":
+            vertical.value = "4"
+        elif swing_mode == "position_3":
             vertical.value = "5"
-        if swing_mode in [SWING_OFF, SWING_VERTICAL] and horizontal.value == "7":
-            horizontal.value = "0"
+        elif swing_mode == "position_4":
+            vertical.value = "6"
+        elif swing_mode == "position_5":
+            vertical.value = "7"
+        # if swing_mode in [SWING_BOTH, SWING_HORIZONTAL]:
+        #     horizontal.value = "7"
+        elif swing_mode in ["swing", SWING_BOTH, SWING_VERTICAL]:
+            vertical.value = "8"
+        # if swing_mode in [SWING_OFF, SWING_HORIZONTAL] and vertical.value == "8":
+        #     vertical.value = "5"
+        # if swing_mode in [SWING_OFF, SWING_VERTICAL] and horizontal.value == "7":
+        #     horizontal.value = "0"
+        else:
+            vertical.value = "5"
         self._attr_swing_mode = swing_mode
+        self._device.settings["settings.echoStatus"].value = "1"
         await self._device.commands["settings"].send()
         self.schedule_update_ha_state()
 
