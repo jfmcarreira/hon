@@ -266,7 +266,7 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
             return PRESET_ECO
         return PRESET_NONE
 
-    async def async_set_preset_mode(self, preset_mode) -> None:
+    async def async_set_preset_mode(self, preset_mode: str) -> None:
         self._device.settings["settings.muteStatus"].value = "0"
         self._device.settings["settings.silentSleepStatus"].value = "0"
         self._device.settings["settings.rapidMode"].value = "0"
@@ -466,7 +466,7 @@ class HonClimateEntity(HonEntity, ClimateEntity):
             )
 
 
-    async def async_set_preset_mode(self, preset_mode) -> None:
+    async def async_set_preset_mode(self, preset_mode: str) -> None:
         return await self.async_start_program(preset_mode)
 
     async def async_start_program(self, preset_mode: str) -> None:
