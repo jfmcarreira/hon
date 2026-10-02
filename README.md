@@ -1,31 +1,31 @@
 # Haier hOn
 [![hacs_badge](https://img.shields.io/badge/hacs-Default-41BDF5.svg)](https://hacs.xyz)
-[![GitHub](https://img.shields.io/github/license/Andre0512/hon?color=red)](https://github.com/Andre0512/hon/blob/main/LICENSE)
-[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Andre0512/hon/python_check.yml?branch=main&label=checks)](https://github.com/Andre0512/hon/actions/workflows/python_check.yml)
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-donate-orange.svg)](https://www.buymeacoffee.com/andre0512)  
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Andre0512/hon?color=green)](https://github.com/Andre0512/hon/releases/latest)
-[![GitHub all releases](https://img.shields.io/github/downloads/Andre0512/hon/latest/total?color=blue&label=downloads)](https://tooomm.github.io/github-release-stats/?username=Andre0512&repository=hon)
-[![GitHub all releases](https://img.shields.io/github/downloads/Andre0512/hon/total?color=blue&label=total%20downloads)](https://tooomm.github.io/github-release-stats/?username=Andre0512&repository=hon)
+[![GitHub](https://img.shields.io/github/license/jfmcarreira/hon?color=red)](https://github.com/jfmcarreira/hon/blob/main/LICENSE)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/jfmcarreira/hon/python_check.yml?branch=main&label=checks)](https://github.com/jfmcarreira/hon/actions/workflows/python_check.yml)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-donate-orange.svg)](https://www.buymeacoffee.com/jfmcarreira)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/jfmcarreira/hon?color=green)](https://github.com/jfmcarreira/hon/releases/latest)
+[![GitHub all releases](https://img.shields.io/github/downloads/jfmcarreira/hon/latest/total?color=blue&label=downloads)](https://tooomm.github.io/github-release-stats/?username=jfmcarreira&repository=hon)
+[![GitHub all releases](https://img.shields.io/github/downloads/jfmcarreira/hon/total?color=blue&label=total%20downloads)](https://tooomm.github.io/github-release-stats/?username=jfmcarreira&repository=hon)
 
 ---
 
-Home Assistant integration for [Haier's mobile app hOn](https://hon-smarthome.com/) based on [pyhOn](https://github.com/Andre0512/pyhon).
+Home Assistant integration for [Haier's mobile app hOn](https://hon-smarthome.com/) based on [pyhOn](https://github.com/jfmcarreira/pyhon).
 
 ---
 
 
-[![Supported Languages](https://img.shields.io/badge/Languages-19-royalblue)](https://github.com/Andre0512/hon#supported-languages)
-[![Supported Appliances](https://img.shields.io/badge/Appliances-11-forestgreen)](https://github.com/Andre0512/hon#supported-appliances)
-[![Supported Models](https://img.shields.io/badge/Models-130-yellowgreen)](https://github.com/Andre0512/hon#supported-appliances)
-[![Supported Entities](https://img.shields.io/badge/Entities-320-crimson)](https://github.com/Andre0512/hon#supported-appliances)
+[![Supported Languages](https://img.shields.io/badge/Languages-19-royalblue)](https://github.com/jfmcarreira/hon#supported-languages)
+[![Supported Appliances](https://img.shields.io/badge/Appliances-11-forestgreen)](https://github.com/jfmcarreira/hon#supported-appliances)
+[![Supported Models](https://img.shields.io/badge/Models-130-yellowgreen)](https://github.com/jfmcarreira/hon#supported-appliances)
+[![Supported Entities](https://img.shields.io/badge/Entities-320-crimson)](https://github.com/jfmcarreira/hon#supported-appliances)
 
 ## Takedown Story
-Haier sent a takedown notice and threatened legal action. The community started a big riot and called for a Haier boycott, the repository was forked over 2000+ times to make the code undeletable. Haier starts a dialog to find a joint solution. Read all about it here:  
-- [Timeline of events](https://github.com/Andre0512/hon/blob/main/takedown_timeline.md)
-- [Takedown FAQs](https://github.com/Andre0512/hon/blob/main/takedown_faq.md)
-- [Main discussion](https://github.com/Andre0512/hon/issues/147)
+Haier sent a takedown notice and threatened legal action. The community started a big riot and called for a Haier boycott, the repository was forked over 2000+ times to make the code undeletable. Haier starts a dialog to find a joint solution. Read all about it here:
+- [Timeline of events](https://github.com/jfmcarreira/hon/blob/main/takedown_timeline.md)
+- [Takedown FAQs](https://github.com/jfmcarreira/hon/blob/main/takedown_faq.md)
+- [Main discussion](https://github.com/jfmcarreira/hon/issues/147)
 - [Summary video](https://www.youtube.com/watch?v=ayG7o74kdbc)
-- [Haier's Statement](https://github.com/Andre0512/hon/issues/147#issuecomment-1923622715)
+- [Haier's Statement](https://github.com/jfmcarreira/hon/issues/147#issuecomment-1923622715)
 
 ## Supported Appliances
 _Click to expand..._
@@ -731,11 +731,11 @@ Support has been confirmed for these **41 models**, but many more will work. Ple
 
 
 ## Installation
-**Method 1:** [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=Andre0512&repository=hon&category=integration)
+**Method 1:** [![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=jfmcarreira&repository=hon&category=integration)
 
-**Method 2:** [HACS](https://hacs.xyz/) > Integrations > Add Integration > **Haier hOn** > Install  
+**Method 2:** [HACS](https://hacs.xyz/) > Integrations > Add Integration > **Haier hOn** > Install
 
-**Method 3:** Manually copy `hon` folder from [latest release](https://github.com/Andre0512/hon/releases/latest) to `config/custom_components` folder.
+**Method 3:** Manually copy `hon` folder from [latest release](https://github.com/jfmcarreira/hon/releases/latest) to `config/custom_components` folder.
 
 _Restart Home Assistant_
 
@@ -743,7 +743,7 @@ _Restart Home Assistant_
 
 **Method 1**: [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=hon)
 
-**Method 2**: Settings > Devices & Services > Add Integration > **Haier hOn**  
+**Method 2**: Settings > Devices & Services > Add Integration > **Haier hOn**
 _If the integration is not in the list, you need to clear the browser cache._
 
 ## Supported Languages
@@ -769,7 +769,7 @@ Translation of internal names like programs are available for all languages whic
 * 🇹🇷 Turkish
 
 ## Compatibility
-Haier offers different apps for different markets. Some appliances are compatible with more than one app. This integration only supports appliances that can be controlled via hOn. Please download the hOn app and check compatibility before you open an issue.   
+Haier offers different apps for different markets. Some appliances are compatible with more than one app. This integration only supports appliances that can be controlled via hOn. Please download the hOn app and check compatibility before you open an issue.
 The apps on this (incomplete) list have been requested so far:
 
 | App             | Main Market   | Supported                               | Alternative                                                                     |
@@ -779,14 +779,14 @@ The apps on this (incomplete) list have been requested so far:
 | Hoover Wizard   | Europe        | :grey_question: (only newer appliances) |                                                                                 |
 | Haier Uhome     | China         | :x:                                     | [banto6/haier](https://github.com/banto6/haier)                                 |
 | Haier U+        | China         | :x:                                     |                                                                                 |
-| GE SmartHQ      | North America | :x:                                     | [simbaja/ha_gehome](https://github.com/simbaja/ha_gehome)                       |   
+| GE SmartHQ      | North America | :x:                                     | [simbaja/ha_gehome](https://github.com/simbaja/ha_gehome)                       |
 | Haier Evo       | Russia        | :x:                                     |                                                                                 |
 
 ## Contribute
 Any kind of contribution is welcome!
 
 
-| Please add your appliances data to our [hon-test-data collection](https://github.com/Andre0512/hon-test-data). <br/>This helps us to develop new features and not to break compatibility in newer versions. |
+| Please add your appliances data to our [hon-test-data collection](https://github.com/jfmcarreira/hon-test-data). <br/>This helps us to develop new features and not to break compatibility in newer versions. |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 
@@ -796,7 +796,7 @@ For every device exists a button under diagnostics which can be used to log all 
 1. Press the button to create a notification
 2. Open home assistant notifications and copy the message (Crtl+A, Ctrl+C)
 ### Add appliances or additional attributes
-1. Install [pyhOn](https://github.com/Andre0512/pyhOn)
+1. Install [pyhOn](https://github.com/jfmcarreira/pyhOn)
    ```commandline
     $ pip install pyhOn
     ```
@@ -819,7 +819,7 @@ For every device exists a button under diagnostics which can be used to log all 
       ...
     ```
 3. Fork this repository and clone it to your local machine
-4. Add the keys of the attributes you'd like to have as `EntityDescription` into this Repository  
+4. Add the keys of the attributes you'd like to have as `EntityDescription` into this Repository
    _Example: Add pause button_
     ```python
     BUTTONS: dict[str, tuple[ButtonEntityDescription, ...]] = {
@@ -832,12 +832,12 @@ For every device exists a button under diagnostics which can be used to log all 
             ),
         ...
     ```
-5. Create a [pull request](https://github.com/Andre0512/hon/pulls)
+5. Create a [pull request](https://github.com/jfmcarreira/hon/pulls)
 
 #### Tips and Tricks
 - If you want to have some states humanreadable, have a look at the `translation_key` parameter of the `EntityDescription`.
 - If you need to implement some more logic, create a pull request to the underlying library. There we collect special requirements in the `appliances` directory.
-- Use [pyhOn's translate command](https://github.com/Andre0512/pyhOn#translation) to read out the official translations
+- Use [pyhOn's translate command](https://github.com/jfmcarreira/pyhOn#translation) to read out the official translations
 
 ## Special Thanks
 - to [@alexandre-leites](https://github.com/alexandre-leites), [@MiguelAngelLV](https://github.com/MiguelAngelLV) and [@drudgebg](https://github.com/drudgebg) for contributing early to this project and adding new integrations.
@@ -848,6 +848,6 @@ For every device exists a button under diagnostics which can be used to log all 
 ## Support
 If you find this project helpful and would like to support its development, you can buy me a coffee! ☕
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/andre0512)
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/jfmcarreira)
 
 Don't forget to star the repository if you found it useful! ⭐

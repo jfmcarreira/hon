@@ -1,17 +1,17 @@
 # Haier hOn
-[![GitHub all releases](https://img.shields.io/github/downloads/Andre0512/hon/total?color=blue&label=total%20downloads)](https://tooomm.github.io/github-release-stats/?username=Andre0512&repository=hon)
-[![GitHub](https://img.shields.io/github/license/Andre0512/hon?color=red)](https://github.com/Andre0512/hon/blob/main/LICENSE)
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-donate-orange.svg)](https://www.buymeacoffee.com/andre0512)
+[![GitHub all releases](https://img.shields.io/github/downloads/jfmcarreira/hon/total?color=blue&label=total%20downloads)](https://tooomm.github.io/github-release-stats/?username=jfmcarreira&repository=hon)
+[![GitHub](https://img.shields.io/github/license/jfmcarreira/hon?color=red)](https://github.com/jfmcarreira/hon/blob/main/LICENSE)
+[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-donate-orange.svg)](https://www.buymeacoffee.com/jfmcarreira)
 
 ---
-Home Assistant integration for [Haier's mobile app hOn](https://hon-smarthome.com/) based on [pyhOn](https://github.com/Andre0512/pyhon).
+Home Assistant integration for [Haier's mobile app hOn](https://hon-smarthome.com/).
 
 ---
 
-[![Supported Languages](https://img.shields.io/badge/Languages-19-royalblue)](https://github.com/Andre0512/hon#supported-languages)
-[![Supported Appliances](https://img.shields.io/badge/Appliances-11-forestgreen)](https://github.com/Andre0512/hon#supported-appliances)
-[![Supported Models](https://img.shields.io/badge/Models-130-yellowgreen)](https://github.com/Andre0512/hon#supported-appliances)
-[![Supported Entities](https://img.shields.io/badge/Entities-320-crimson)](https://github.com/Andre0512/hon#supported-appliances)  
+[![Supported Languages](https://img.shields.io/badge/Languages-19-royalblue)](https://github.com/jfmcarreira/hon#supported-languages)
+[![Supported Appliances](https://img.shields.io/badge/Appliances-11-forestgreen)](https://github.com/jfmcarreira/hon#supported-appliances)
+[![Supported Models](https://img.shields.io/badge/Models-130-yellowgreen)](https://github.com/jfmcarreira/hon#supported-appliances)
+[![Supported Entities](https://img.shields.io/badge/Entities-320-crimson)](https://github.com/jfmcarreira/hon#supported-appliances)
 
 ## Supported Appliances
 _Click to expand..._
@@ -720,7 +720,7 @@ Support has been confirmed for these **41 models**, but many more will work. Ple
 
 **Method 1**: [![Open your Home Assistant instance and start setting up a new integration.](https://my.home-assistant.io/badges/config_flow_start.svg)](https://my.home-assistant.io/redirect/config_flow_start/?domain=hon)
 
-**Method 2**: Settings > Devices & Services > Add Integration > **Haier hOn**  
+**Method 2**: Settings > Devices & Services > Add Integration > **Haier hOn**
 _If the integration is not in the list, you need to clear the browser cache._
 
 ## Supported Languages
@@ -746,7 +746,7 @@ Translation of internal names like programs are available for all languages whic
 * 🇹🇷 Turkish
 
 ## Compatiblity
-Haier offers different apps for different markets. Some appliances are compatible with more than one app. This integration only supports appliances that can be controlled via hOn. Please download the hOn app and check compatibilty before you open an issue.   
+Haier offers different apps for different markets. Some appliances are compatible with more than one app. This integration only supports appliances that can be controlled via hOn. Please download the hOn app and check compatibilty before you open an issue.
 The apps on this (incomplete) list have been requested so far:
 
 | App             | Main Market   | Supported                               | Alternative                                                                     |
@@ -756,26 +756,26 @@ The apps on this (incomplete) list have been requested so far:
 | Hoover Wizard   | Europe        | :grey_question: (only newer appliances) |                                                                                 |
 | Haier Uhome     | China         | :x:                                     | [banto6/haier](https://github.com/banto6/haier)                                 |
 | Haier U+        | China         | :x:                                     |                                                                                 |
-| GE SmartHQ      | North America | :x:                                     | [simbaja/ha_gehome](https://github.com/simbaja/ha_gehome)                       |   
+| GE SmartHQ      | North America | :x:                                     | [simbaja/ha_gehome](https://github.com/simbaja/ha_gehome)                       |
 | Haier Evo       | Russia        | :x:                                     |                                                                                 |
 
 ## Contribute
-Want to help us to support more appliances? Or add more sensors? Or help with translating? Or beautify some icons or captions? 
-Check out the [project on GitHub](https://github.com/Andre0512/hon), every contribution is welcome!
+Want to help us to support more appliances? Or add more sensors? Or help with translating? Or beautify some icons or captions?
+Check out the [project on GitHub](https://github.com/jfmcarreira/hon), every contribution is welcome!
 
-| Please add your appliances data to our [hon-test-data collection](https://github.com/Andre0512/hon-test-data). <br/>This helps us to develop new features and not to break compatibility in newer versions. |
+| Please add your appliances data to our [hon-test-data collection](https://github.com/jfmcarreira/hon-test-data). <br/>This helps us to develop new features and not to break compatibility in newer versions. |
 |-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 
 ## Useful Links
-* [GitHub repository](https://github.com/Andre0512/hon)
-* [pyhOn library](https://github.com/Andre0512/pyhOn)
-* [Release notes](https://github.com/Andre0512/hon/releases)
-* [Discussion and help](https://github.com/Andre0512/hon/discussions)
-* [Issues](https://github.com/Andre0512/hon/issues)
+* [GitHub repository](https://github.com/jfmcarreira/hon)
+* [pyhOn library](https://github.com/mmalolepszy/hon-revived)
+* [Release notes](https://github.com/jfmcarreira/hon/releases)
+* [Discussion and help](https://github.com/jfmcarreira/hon/discussions)
+* [Issues](https://github.com/jfmcarreira/hon/issues)
 
 ## Support
 If you find this project helpful and would like to support its development, you can buy me a coffee! ☕
 
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/andre0512)
+[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/jfmcarreira)
 
 Don't forget to star the repository if you found it useful! ⭐
