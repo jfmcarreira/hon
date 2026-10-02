@@ -29,7 +29,13 @@ from homeassistant.helpers.entity_platform import AddEntitiesCallback
 from pyhon.appliance import HonAppliance
 from pyhon.parameter.range import HonParameterRange
 
-from .const import HON_HVAC_MODE, HON_FAN, DOMAIN, HON_HVAC_PROGRAM, AC_POSITION_VERTICAL
+from .const import (
+    HON_HVAC_MODE,
+    HON_FAN,
+    DOMAIN,
+    HON_HVAC_PROGRAM,
+    AC_POSITION_VERTICAL,
+)
 from .hon import HonEntity
 
 _LOGGER = logging.getLogger(__name__)
@@ -164,8 +170,8 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
             "position_4",
             "position_5",
             SWING_VERTICAL,
-            #SWING_HORIZONTAL,
-            #SWING_BOTH,
+            # SWING_HORIZONTAL,
+            # SWING_BOTH,
         ]
         self._attr_supported_features = (
             ClimateEntityFeature.TURN_ON
@@ -215,17 +221,27 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
         self._attr_hvac_mode = hvac_mode
         if hvac_mode == HVACMode.OFF:
             self._device.settings["stopProgram.echoStatus"].value = "1"
-            self._device.settings["stopProgram.tempSel"].value = self._device.settings["settings.tempSel"].value
-            self._device.settings["stopProgram.windSpeed"].value = self._device.settings["settings.windSpeed"].value
-            self._device.settings["stopProgram.windDirectionVertical"].value = self._device.settings["settings.windDirectionVertical"].value
+            self._device.settings["stopProgram.tempSel"].value = self._device.settings[
+                "settings.tempSel"
+            ].value
+            self._device.settings["stopProgram.windSpeed"].value = (
+                self._device.settings["settings.windSpeed"].value
+            )
+            self._device.settings["stopProgram.windDirectionVertical"].value = (
+                self._device.settings["settings.windDirectionVertical"].value
+            )
             await self._device.commands["stopProgram"].send()
             self._device.settings["settings.onOffStatus"].value = "0"
         elif hvac_mode == HVACMode.FAN_ONLY:
             if program := self._device.settings.get("startProgram.program"):
                 program.value = "iot_fan"
             self._device.settings["startProgram.echoStatus"].value = "1"
-            self._device.settings["startProgram.tempSel"].value = self._device.settings["settings.tempSel"].value
-            self._device.settings["startProgram.windDirectionVertical"].value = self._device.settings["settings.windDirectionVertical"].value
+            self._device.settings["startProgram.tempSel"].value = self._device.settings[
+                "settings.tempSel"
+            ].value
+            self._device.settings["startProgram.windDirectionVertical"].value = (
+                self._device.settings["settings.windDirectionVertical"].value
+            )
             await self._device.commands["startProgram"].send()
         else:
             self._device.settings["settings.onOffStatus"].value = "1"
@@ -242,17 +258,29 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
 
     async def async_turn_on(self, **kwargs: Any) -> None:
         self._device.settings["startProgram.echoStatus"].value = "1"
-        self._device.settings["startProgram.windSpeed"].value = self._device.settings["settings.windSpeed"].value
-        self._device.settings["startProgram.windDirectionVertical"].value = self._device.settings["settings.windDirectionVertical"].value
-        self._device.settings["startProgram.machMode"].value = self._device.settings["settings.machMode"].value
+        self._device.settings["startProgram.windSpeed"].value = self._device.settings[
+            "settings.windSpeed"
+        ].value
+        self._device.settings["startProgram.windDirectionVertical"].value = (
+            self._device.settings["settings.windDirectionVertical"].value
+        )
+        self._device.settings["startProgram.machMode"].value = self._device.settings[
+            "settings.machMode"
+        ].value
         await self._device.commands["startProgram"].send()
         self._device.sync_command("startProgram", "settings")
 
     async def async_turn_off(self, **kwargs: Any) -> None:
         self._device.settings["stopProgram.echoStatus"].value = "1"
-        self._device.settings["stopProgram.tempSel"].value = self._device.settings["settings.tempSel"].value
-        self._device.settings["stopProgram.windSpeed"].value = self._device.settings["settings.windSpeed"].value
-        self._device.settings["stopProgram.windDirectionVertical"].value = self._device.settings["settings.windDirectionVertical"].value
+        self._device.settings["stopProgram.tempSel"].value = self._device.settings[
+            "settings.tempSel"
+        ].value
+        self._device.settings["stopProgram.windSpeed"].value = self._device.settings[
+            "settings.windSpeed"
+        ].value
+        self._device.settings["stopProgram.windDirectionVertical"].value = (
+            self._device.settings["settings.windDirectionVertical"].value
+        )
         await self._device.commands["stopProgram"].send()
         self._device.settings["settings.onOffStatus"].value = "0"
 
@@ -323,7 +351,13 @@ class HonACClimateEntity(HonEntity, ClimateEntity):
         """Return the swing setting."""
         horizontal = self._device.get("windDirectionHorizontal")
         vertical = self._device.get("windDirectionVertical")
-        if vertical == 2 or vertical == 4 or vertical == 5 or vertical == 6 or vertical == 7:
+        if (
+            vertical == 2
+            or vertical == 4
+            or vertical == 5
+            or vertical == 6
+            or vertical == 7
+        ):
             return AC_POSITION_VERTICAL[vertical]
         # if horizontal == 7 and vertical == 8:
         #     return SWING_BOTH
@@ -464,7 +498,6 @@ class HonClimateEntity(HonEntity, ClimateEntity):
             return self._device.get(
                 f"mode{self.entity_description.key[-2:]}", "no_mode"
             )
-
 
     async def async_set_preset_mode(self, preset_mode: str) -> None:
         return await self.async_start_program(preset_mode)
