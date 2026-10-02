@@ -2,10 +2,10 @@ import json
 import logging
 from contextlib import suppress
 from datetime import timedelta
+from importlib.metadata import version
 from pathlib import Path
 from typing import Optional, Any
 
-import pkg_resources  # type: ignore[import, unused-ignore]
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import callback, HomeAssistant
 from homeassistant.helpers.entity import DeviceInfo
@@ -23,7 +23,7 @@ class HonInfo:
     def __init__(self) -> None:
         self._manifest: dict[str, Any] = self._get_manifest()
         self._hon_version: str = self._manifest.get("version", "")
-        self._pyhon_version: str = pkg_resources.get_distribution("pyhon").version
+        self._pyhon_version: str = version("pyhon")
 
     @staticmethod
     def _get_manifest() -> dict[str, Any]:
