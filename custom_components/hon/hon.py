@@ -23,7 +23,7 @@ class HonInfo:
     def __init__(self) -> None:
         self._manifest: dict[str, Any] = self._get_manifest()
         self._hon_version: str = self._manifest.get("version", "")
-        self._pyhon_version: str = version("pyhon")
+        self._pyhon_version: str = version("pyhon-revived")
 
     @staticmethod
     def _get_manifest() -> dict[str, Any]:
